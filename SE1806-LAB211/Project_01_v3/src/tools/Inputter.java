@@ -9,10 +9,6 @@ import java.util.Scanner;
 import models.Customer;
 import models.Order;
 
-/**
- *
- * @author tungi
- */
 public class Inputter {
 
     private Scanner scanner;
@@ -57,25 +53,22 @@ public class Inputter {
                 System.out.println(errMsg + ". Please re-enter...");
             }
         } while (more);
-
         return input;
     }
 
     public Customer inputCustomer(boolean isUpdated) {
         Customer customer = new Customer();
-
         String msg = "Input Customer Code (the first character is [C,G,K], followed by 4 digits): ";
         String errorMsg = "Customer code cannot be empty! Customer code must start with C, G, K, followed by 4 digits!";
         String regex = Acceptable.customerCodeRegex;
         if (!isUpdated) {
             customer.setCustomerCode(input(msg, errorMsg, regex).toUpperCase());
         }
-
         msg = "Input name: ";
         errorMsg = "Name cannot be empty. Name must be between 2 and 25 characters.";
         regex = Acceptable.nameRegex;
         customer.setName(input(msg, errorMsg, regex));
-
+        
         msg = "Input phone: ";
         errorMsg = "Invalid phone format!";
         regex = Acceptable.phoneRegex;
@@ -89,10 +82,6 @@ public class Inputter {
         return customer;
     }
 
-//    public SetMenu inputSetMenu() {
-//        return null;
-//    }
-//
     public Order inputOrder(Customers customers, SetMenus setMenus, boolean isUpdated) {
         // ----
         String customerCode = "";

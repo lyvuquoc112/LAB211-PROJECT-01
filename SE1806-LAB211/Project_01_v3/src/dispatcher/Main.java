@@ -45,8 +45,7 @@ public class Main {
                         option = Integer.parseInt(inputter.input("Enter your option: ","Option must be 1 or 2" , "^[12]$"));
                     } while (option ==1 );
                     break;
-                case 2:
-                    
+                case 2: 
                     do {
                         System.out.print("Enter customer code: ");
                         String customerCode = scanner.nextLine();

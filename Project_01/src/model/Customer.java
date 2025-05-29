@@ -1,24 +1,29 @@
-
-package models;
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package model;
 
 import java.util.Objects;
 
-
-
+/**
+ *
+ * @author hanly
+ */
 public class Customer {
-
     private String customerCode;
     private String name;
-    private String phone;
+    private String phoneNumber;
     private String email;
 
     public Customer() {
     }
 
-    public Customer(String customerCode, String name, String phone, String email) {
+    
+    public Customer(String customerCode, String name, String phoneNumber, String email) {
         this.customerCode = customerCode;
         this.name = name;
-        this.phone = phone;
+        this.phoneNumber = phoneNumber;
         this.email = email;
     }
 
@@ -38,12 +43,12 @@ public class Customer {
         this.name = name;
     }
 
-    public String getPhone() {
-        return phone;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public String getEmail() {
@@ -56,13 +61,13 @@ public class Customer {
 
     @Override
     public String toString() {
-        return "Customer{" + "customerCode=" + customerCode + ", name=" + name + ", phone=" + phone + ", email=" + email + '}';
+        return "customer{" + "customerCode=" + customerCode + ", name=" + name + ", phoneNumber=" + phoneNumber + ", email=" + email + '}';
     }
 
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 41 * hash + Objects.hashCode(this.customerCode);
+        hash = 59 * hash + Objects.hashCode(this.customerCode);
         return hash;
     }
 
@@ -79,13 +84,7 @@ public class Customer {
         }
         final Customer other = (Customer) obj;
         return Objects.equals(this.customerCode, other.customerCode);
-
     }
-
-    public void display() {
-        System.out.format("%-18s:%s\n", "Customer code", this.getCustomerCode());
-        System.out.format("%-18s:%s\n", "Customer name", this.getName());
-        System.out.format("%-18s:%s\n", "Phone number", this.getPhone());
-        System.out.format("%-18s:%s\n", "Email", this.getEmail());
-    }
+    
+    
 }

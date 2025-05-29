@@ -34,11 +34,11 @@ public class Orders extends ArrayList<Order> implements Workable<Order, String>{
     // This method is not used directly, we'll use showAll(Customers, SetMenus) instead
 }
 
-public void showAll(Customers customers, SetMenus setMenus) {
-    if (this.isEmpty()) {
-        System.out.println("Does not have any order information.");
-        return;
-    }
+    public void showAll(Customers customers, SetMenus setMenus) {
+        if (this.isEmpty()) {
+            System.out.println("Does not have any order information.");
+            return;
+        }
     
     // Convert to ArrayList for sorting
     ArrayList<Order> sortedOrders = new ArrayList<>(this);
@@ -55,7 +55,7 @@ public void showAll(Customers customers, SetMenus setMenus) {
         double totalCost = order.getNumberOfTables() * menu.getPrice();
         
         System.out.format("%-8s | %-12s | %-12s | %-10s | %,-12.0f | %-7d | %,-12.0f%n",
-            order.getCustomerCode(),
+            order.getOrderId(),
             sdf.format(order.getEventDate()),
             order.getCustomerCode(),
             order.getCodeOfSetMenu(),
