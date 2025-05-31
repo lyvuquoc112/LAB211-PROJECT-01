@@ -86,5 +86,11 @@ public class Customer {
         return Objects.equals(this.customerCode, other.customerCode);
     }
     
+    public void display(){
+        System.out.printf("%-18s:%s\n","Customer code",this.getCustomerCode());
+        System.out.printf("%-18s:%s\n","Customer name",this.getName());
+        System.out.printf("%-18s:%s\n","Phone number",this.getPhoneNumber());
+        System.out.printf("%-18s:%s\n","Email",this.getEmail());
+    }
     
 }

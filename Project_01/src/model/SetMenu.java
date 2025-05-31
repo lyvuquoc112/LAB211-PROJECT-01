@@ -4,6 +4,10 @@
  */
 package model;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Objects;
+
 /**
  *
  * @author hanly
@@ -55,5 +59,26 @@ public class SetMenu {
     public void setIngredients(String Ingredients) {
         this.Ingredients = Ingredients;
     }
+
+    
+    
+    
+    public void display(Date evenDate, int numberOfTable){
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        System.out.printf("%-18s:%s\n", "Code of Set Menu",this.getCode());
+        System.out.printf("%-18s:%s\n", "Set menu name",this.getName());
+        System.out.printf("%-18s:%s\n", "Event Date",sdf.format(evenDate));
+        System.out.printf("%-18s:%s\n", "Number of tables",numberOfTable);
+        System.out.printf("%-18s:%s\n", "Price",String.format("%,.0f Vnd", this.getPrice()));
+        System.out.printf("%-18s:\n","Ingredients");
+        String ingredients = this.getIngredients().trim();
+            if(ingredients.startsWith("\"")&&ingredients.endsWith("\"")){
+                ingredients = ingredients.substring(1, ingredients.length()-1).trim();
+            }
+            String[] strs = ingredients.split("#");
+            for (String str : strs) {
+                System.out.println(str);
+            }
+    }  
     
 }

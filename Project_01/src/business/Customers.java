@@ -6,6 +6,7 @@ package business;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
 import model.Customer;
 
@@ -14,7 +15,7 @@ import model.Customer;
  * @author hanly
  */
 public class Customers extends HashSet<Customer> implements Workable<Customer, String>{ 
-    // dùng HashSet bởi mộ customerCode thì chỉ có một giá trị thôi
+    // dùng HashSet bởi một customerCode thì chỉ có một giá trị thôi
     
     public Customers(){
         this.add(new Customer("C0001", "Nguyen Van An", "0901234567", "nguyenvanan@gmail.com"));
@@ -52,7 +53,12 @@ public class Customers extends HashSet<Customer> implements Workable<Customer, S
         System.out.printf("%-5s | %-25s | %-10s | %-20s\n", "Code","Customer Name","Phone","Email");
         System.out.println("-------------------------------------------------------------------------");
         ArrayList<Customer> sortedList = new ArrayList<>(this);
-        Collections.sort(sortedList,(o1,o2)-> o1.getName().compareToIgnoreCase(o2.getName()));
+        Collections.sort(sortedList, new Comparator<Customer>() {
+            @Override
+            public int compare(Customer o1, Customer o2) {
+                return o1.getName().compareToIgnoreCase(o2.getName());
+            }
+        });
         for (Customer customer : sortedList) {
              System.out.printf("%-5s | %-25s | %-10s | %-20s\n",
                      customer.getCustomerCode(),
@@ -60,14 +66,19 @@ public class Customers extends HashSet<Customer> implements Workable<Customer, S
                      customer.getPhoneNumber(),
                      customer.getEmail());
         }
-        System.out.println("-------------------------------------------------------------------------");
+        System.out.println("------------------------------------------------------------------------------------------------");
     }
     public void showFilteredByName(HashSet<Customer> h){
         System.out.println("-------------------------------------------------------------------------");
         System.out.printf("%-5s | %-25s | %-10s | %-20s\n", "Code","Customer Name","Phone","Email");
         System.out.println("-------------------------------------------------------------------------");
         ArrayList<Customer> sortedList = new ArrayList<>(h);
-        Collections.sort(sortedList,(o1,o2)-> o1.getName().compareToIgnoreCase(o2.getName()));
+        Collections.sort(sortedList, new Comparator<Customer>() {
+            @Override
+            public int compare(Customer o1, Customer o2) {
+                return o1.getName().compareToIgnoreCase(o2.getName());
+            }
+        });
         for (Customer customer : sortedList) {
              System.out.printf("%-5s | %-25s | %-10s | %-20s\n",
                      customer.getCustomerCode(),
@@ -80,12 +91,9 @@ public class Customers extends HashSet<Customer> implements Workable<Customer, S
 
     @Override
     public Customer searchById(String k) {
-        Customer customer = null;
-        
+        Customer customer = null; 
         for (Customer thi : this) {
-            String id = k.toUpperCase();
-            String di = thi.getCustomerCode().toUpperCase();
-            if(di.equals(id)){
+            if(thi.getCustomerCode().equalsIgnoreCase(k)){
                 return thi;
             }
         }return customer;

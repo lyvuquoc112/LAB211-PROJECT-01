@@ -12,6 +12,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.TreeMap;
 import model.SetMenu;
@@ -60,7 +61,7 @@ public class SetMenus extends TreeMap<String,SetMenu > implements Workable<SetMe
         String[] strs = line.split(",");
         if(strs.length == 4){
             try {
-                 String code = strs[0];
+                String code = strs[0];
                 String name = strs[1];
                 double price = Double.parseDouble(strs[2]);
                 String ingredients = strs[3];
@@ -87,11 +88,16 @@ public class SetMenus extends TreeMap<String,SetMenu > implements Workable<SetMe
         System.out.println("List of Set Menus for ordering party");
         System.out.println("---------------------------------------------------");
         List<SetMenu> list = new ArrayList<>(this.values());
-        Collections.sort(list,(o1,o2)->o1.getPrice().compareTo(o2.getPrice()));
+        Collections.sort(list,new Comparator<SetMenu>() {
+            @Override
+            public int compare(SetMenu o1, SetMenu o2) {
+                return o1.getPrice().compareTo(o2.getPrice());
+            }
+        });
         for (SetMenu setMenu : list) {
             System.out.printf("%-18s:%s\n", "Code", setMenu.getCode());
             System.out.printf("%-18s:%s\n", "Name", setMenu.getName());
-            System.out.printf("%-18s:%s\n", "Price", String.format("%,.0f", setMenu.getPrice()));
+            System.out.printf("%-18s:%s\n", "Price", String.format("%,.0f Vnd", setMenu.getPrice()));
             System.out.printf("%-18s:\n","Ingredients");
             String ingredients = setMenu.getIngredients().trim();
             if(ingredients.startsWith("\"")&&ingredients.endsWith("\"")){
@@ -107,7 +113,7 @@ public class SetMenus extends TreeMap<String,SetMenu > implements Workable<SetMe
 
     @Override
     public SetMenu searchById(String k) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return this.get(k);
     }
     
 }
